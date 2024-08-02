@@ -27,7 +27,7 @@ function Success() {
   )
 }
 
-export function SuccessPage() {
+export default function SuccessPage() {
   return (
     <Suspense fallback={<Loading />}>
       <Success />
