@@ -1,10 +1,12 @@
 'use client'
 
+import { Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 
 import BackLink from '@/components/BackLink'
+import Loading from '@/components/Loading'
 
-export default function SuccessPage() {
+function Success() {
   const params = useSearchParams()
   const message = params.get('message') || 'Operação concluída com sucesso!'
 
@@ -22,5 +24,13 @@ export default function SuccessPage() {
         </p>
       </div>
     </main>
+  )
+}
+
+export function SuccessPage() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <Success />
+    </Suspense>
   )
 }

@@ -82,9 +82,7 @@ export default function Login() {
             <p className="text-alert text-sm">{errors.password.message}</p>
           )}
 
-          <SubmitButton pendingText="Iniciando sessão...">
-            Iniciar sessão
-          </SubmitButton>
+          <SubmitButton pendingText="Iniciando sessão...">Entrar</SubmitButton>
         </form>
       </div>
     </main>
