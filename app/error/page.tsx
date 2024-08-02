@@ -1,3 +1,7 @@
 export default function ErrorPage() {
-  return <p>Sorry, something went wrong</p>
+  return (
+    <main className="min-h-screen flex justify-center items-center">
+      <p>Desculpe, algo deu errado</p>
+    </main>
+  )
 }
