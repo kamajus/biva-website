@@ -58,14 +58,13 @@ export default function UpdatePassword() {
     const supabase = createClient()
 
     const { error } = await supabase.auth.updateUser({ password: newPassword })
+    await supabase.auth.signOut().catch(() => {})
 
     if (!error) {
-      toast.success('Palavra-passe atualizada com sucesso')
+      router.replace('/sucess?message=Palavra-passe atualizada com sucesso')
     } else {
       toast.error('Não foi possível alterar a palavra-passe')
     }
-
-    supabase.auth.signOut()
   }
 
   useEffect(() => {
@@ -89,7 +88,6 @@ export default function UpdatePassword() {
         <main className="min-h-screen flex flex-col items-center">
           <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
             <BackLink />
-
             <form
               className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
               onSubmit={handleSubmit(onSubmit)}
@@ -123,7 +121,7 @@ export default function UpdatePassword() {
               )}
 
               <SubmitButton pendingText="Alterando senha...">
-                Alterar a palavra-passe
+                Continuar
               </SubmitButton>
             </form>
           </div>
