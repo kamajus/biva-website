@@ -1,85 +1,90 @@
-import Link from 'next/link'
-import { redirect } from 'next/navigation'
+'use client'
 
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import { z } from 'zod'
+
+import BackLink from '@/components/BackLink'
 import { SubmitButton } from '@/components/SubmitButton'
-import { createClient } from '@/utils/supabase/server'
+import { createClient } from '@/utils/supabase/client'
+import { zodResolver } from '@hookform/resolvers/zod'
 
-export default function Login({
-  searchParams,
-}: {
-  searchParams: { message: string }
-}) {
-  const signIn = async (formData: FormData) => {
-    'use server'
+const loginSchema = z.object({
+  email: z.string().email({ message: 'Email inválido' }),
+  password: z
+    .string()
+    .min(6, { message: 'A senha deve ter pelo menos 6 caracteres' }),
+})
 
-    const email = formData.get('email') as string
-    const password = formData.get('password') as string
+type LoginFormInputs = z.infer<typeof loginSchema>
+
+export default function Login() {
+  const router = useRouter()
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormInputs>({
+    resolver: zodResolver(loginSchema),
+  })
+
+  const onSubmit = async (data: LoginFormInputs) => {
     const supabase = createClient()
+    const { email, password } = data
 
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     })
 
-    if (error) {
-      return redirect('/login?message=Não foi possivel iniciar sessão')
+    if (!error) {
+      router.replace('/')
+    } else {
+      toast.error('Não foi possivel iniciar sessão')
     }
-
-    return redirect('/')
   }
 
   return (
     <main className="min-h-screen flex flex-col items-center">
       <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
-        <Link
-          href="/"
-          className="absolute left-8 top-8 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1"
-          >
-            <polyline points="15 18 9 12 15 6" />
-          </svg>{' '}
-          Voltar
-        </Link>
+        <BackLink />
 
-        <form className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
+        <form
+          className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <label className="text-md" htmlFor="email">
             Email
           </label>
           <input
-            className="rounded-md px-4 py-2 bg-inherit border mb-6"
-            name="email"
+            id="email"
+            {...register('email')}
+            className="rounded-md px-4 py-2 bg-inherit border"
             placeholder="eu@exemplo.com"
-            required
           />
-          <label className="text-md" htmlFor="password">
+          {errors.email && (
+            <p className="text-alert text-sm">{errors.email.message}</p>
+          )}
+
+          <label className="mt-3 text-md" htmlFor="password">
             Palavra-passe
           </label>
           <input
-            className="rounded-md px-4 py-2 bg-inherit border mb-6"
+            id="password"
             type="password"
-            name="password"
+            {...register('password')}
+            className="rounded-md px-4 py-2 bg-inherit border mb-6"
             placeholder="••••••••"
-            required
           />
-          <SubmitButton formAction={signIn} pendingText="Iniciando sessão...">
+          {errors.password && (
+            <p className="text-alert text-sm">{errors.password.message}</p>
+          )}
+
+          <SubmitButton pendingText="Iniciando sessão...">
             Iniciar sessão
           </SubmitButton>
-          {searchParams?.message && (
-            <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
-              {searchParams.message}
-            </p>
-          )}
         </form>
       </div>
     </main>

@@ -1,97 +1,134 @@
-import Link from 'next/link'
-import { redirect } from 'next/navigation'
+'use client'
 
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import { z } from 'zod'
+
+import BackLink from '@/components/BackLink'
+import Loading from '@/components/Loading'
 import { SubmitButton } from '@/components/SubmitButton'
-import { createClient } from '@/utils/supabase/server'
+import { createClient } from '@/utils/supabase/client'
+import { zodResolver } from '@hookform/resolvers/zod'
 
-export default function UpdatePassword({
-  searchParams,
-}: {
-  searchParams: { message: string }
-}) {
-  const signIn = async (formData: FormData) => {
-    'use server'
+const passwordSchema = z
+  .object({
+    newPassword: z
+      .string({
+        required_error: 'A palavra-passe é obrigatória',
+        invalid_type_error: 'Palavra-passe inválida',
+      })
+      .min(8, 'A palavra-passe deve ter pelo menos 8 caracteres')
+      .regex(
+        /^(?=.*[a-zA-Z])(?=.*\d)/,
+        'A palavra-passe deve conter pelo menos uma letra e um número',
+      ),
+    confirmPassword: z
+      .string({
+        required_error: 'A palavra-passe é obrigatória',
+        invalid_type_error: 'Palavra-passe inválida',
+      })
+      .min(8, 'A palavra-passe deve ter pelo menos 8 caracteres')
+      .regex(
+        /^(?=.*[a-zA-Z])(?=.*\d)/,
+        'A palavra-passe deve conter pelo menos uma letra e um número',
+      ),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: 'As palavras-passe não são semelhantes',
+    path: ['confirmPassword'],
+  })
 
-    const newPassword = formData.get('newPassword') as string
-    const confirmPassword = formData.get('confirmPassword') as string
+type PasswordFormInputs = z.infer<typeof passwordSchema>
 
-    if (newPassword !== confirmPassword) {
-      return redirect('/update-password?message=As palavras não coincedem')
-    }
+export default function UpdatePassword() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<PasswordFormInputs>({
+    resolver: zodResolver(passwordSchema),
+  })
 
+  const [loading, setLoading] = useState(true)
+  const router = useRouter()
+
+  const onSubmit = async ({ newPassword }: PasswordFormInputs) => {
     const supabase = createClient()
 
-    const { error } = await supabase.auth.updateUser({
-      password: newPassword,
-    })
+    const { error } = await supabase.auth.updateUser({ password: newPassword })
 
-    if (error) {
-      return redirect(
-        '/update-password?message=Não foi possivel alterar a palavra-passe',
-      )
+    if (!error) {
+      toast.success('Palavra-passe atualizada com sucesso')
+    } else {
+      toast.error('Não foi possível alterar a palavra-passe')
     }
 
-    await supabase.auth.signOut()
-    return redirect(
-      '/update-password?message=Palavra-passe atualizada com sucesso',
-    )
+    supabase.auth.signOut()
   }
 
-  return (
-    <main className="min-h-screen flex flex-col items-center">
-      <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
-        <Link
-          href="/"
-          className="absolute left-8 top-8 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1"
-          >
-            <polyline points="15 18 9 12 15 6" />
-          </svg>{' '}
-          Voltar
-        </Link>
+  useEffect(() => {
+    ;(async function () {
+      const supabase = createClient()
+      const user = await supabase.auth.getUser()
 
-        <form className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
-          <label className="text-md" htmlFor="newPassword">
-            Nova palavra-passe
-          </label>
-          <input
-            className="rounded-md px-4 py-2 bg-inherit border mb-6"
-            type="password"
-            name="newPassword"
-            placeholder="••••••••"
-            required
-          />
-          <label className="text-md" htmlFor="confirmPassword">
-            Confirmar palavra-passe
-          </label>
-          <input
-            className="rounded-md px-4 py-2 bg-inherit border mb-6"
-            type="password"
-            name="confirmPassword"
-            placeholder="••••••••"
-            required
-          />
-          <SubmitButton formAction={signIn} pendingText="Signing In...">
-            Alterar a palavra-passe
-          </SubmitButton>
-          {searchParams?.message && (
-            <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
-              {searchParams.message}
-            </p>
-          )}
-        </form>
-      </div>
-    </main>
+      if (!user.data?.user) {
+        router.replace('/login')
+      } else {
+        setLoading(false)
+      }
+    })()
+  }, [router])
+
+  return (
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <main className="min-h-screen flex flex-col items-center">
+          <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
+            <BackLink />
+
+            <form
+              className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <label className="text-md" htmlFor="newPassword">
+                Nova palavra-passe
+              </label>
+              <input
+                id="newPassword"
+                type="password"
+                {...register('newPassword')}
+                className="rounded-md px-4 py-2 bg-inherit border"
+                placeholder="••••••••"
+              />
+              {errors.newPassword && (
+                <p className="text-alert">{errors.newPassword.message}</p>
+              )}
+
+              <label className="text-md" htmlFor="confirmPassword">
+                Confirmar palavra-passe
+              </label>
+              <input
+                id="confirmPassword"
+                type="password"
+                {...register('confirmPassword')}
+                className="rounded-md px-4 py-2 bg-inherit border"
+                placeholder="••••••••"
+              />
+              {errors.confirmPassword && (
+                <p className="text-alert">{errors.confirmPassword.message}</p>
+              )}
+
+              <SubmitButton pendingText="Alterando senha...">
+                Alterar a palavra-passe
+              </SubmitButton>
+            </form>
+          </div>
+        </main>
+      )}
+    </>
   )
 }

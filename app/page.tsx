@@ -3,11 +3,13 @@ import Header from '@/components/Header'
 
 export default async function Index() {
   return (
-    <div className="flex-1 w-full min-h-screen flex items-center justify-center">
+    <div>
       <Header />
-      <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center">
-        Em construção!{' '}
-      </p>
+      <div className="h-[80vh] w-full flex items-center justify-center">
+        <p className="text-3xl lg:text-4xl !leading-tight mx-auto text-center">
+          🚧 Em construção...
+        </p>
+      </div>
       <Footer />
     </div>
   )
