@@ -1,22 +1,21 @@
 import Image from 'next/image'
 
-import { createClient } from '@/utils/supabase/server'
-
-import AuthButton from './AuthButton'
-
+// import { createClient } from '@/utils/supabase/server'
 import icon from '../assets/icon.png'
 
-export default function Header() {
-  const canInitSupabaseClient = () => {
-    try {
-      createClient()
-      return true
-    } catch (e) {
-      return false
-    }
-  }
+// import AuthButton from './AuthButton'
 
-  const isSupabaseConnected = canInitSupabaseClient()
+export default function Header() {
+  // const canInitSupabaseClient = () => {
+  //   try {
+  //     createClient()
+  //     return true
+  //   } catch (e) {
+  //     return false
+  //   }
+  // }
+
+  // const isSupabaseConnected = canInitSupabaseClient()
 
   return (
     <nav className="w-full flex justify-center items-center border-b h-[10vh] bg-white">
@@ -31,7 +30,7 @@ export default function Header() {
           />
           <h1 className="text-base font-medium">Kasa ao</h1>
         </div>
-        {isSupabaseConnected && <AuthButton />}
+        {/* {isSupabaseConnected && <AuthButton />} */}
       </div>
     </nav>
   )

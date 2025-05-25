@@ -1,5 +1,9 @@
-import { FaApple, FaGooglePlay } from 'react-icons/fa'
+'use client'
+
 import Image from 'next/image'
+import { FaApple, FaGooglePlay } from 'react-icons/fa'
+import { Pagination } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
@@ -8,23 +12,28 @@ import homeScreenshot from '../assets/screenshots/home.jpg'
 import residenceScreenshot from '../assets/screenshots/residence.jpg'
 import wishesScreenshot from '../assets/screenshots/wishes.jpg'
 
-export default async function Index() {
+import 'swiper/css'
+import 'swiper/css/pagination'
+
+export default function Index() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
 
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-primary to-secondly py-16 px-4">
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-secondly/30 py-16 px-4">
         <div className="absolute inset-0 bg-black/10" />
         <div className="container mx-auto relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-12">
             <div className="w-full md:w-1/2 text-center md:text-left">
-              <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 text-white leading-tight">
-                Kasa Ao na <br />
-                <span className="text-thirdly">palma da mão</span>
+              <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 text-thirdly leading-tight">
+                Kasa ao
+                <br />
+                <span className="text-black">na palma da mão</span>
               </h1>
-              <p className="text-lg sm:text-xl md:text-2xl mb-8 text-white/90">
-                Baixe agora o aplicativo e tenha acesso às melhores oportunidades imobiliárias em Angola
+              <p className="text-lg sm:text-xl md:text-2xl mb-8 text-gray-900">
+                Baixe agora o aplicativo e tenha acesso às melhores
+                oportunidades imobiliárias em Angola
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <button className="bg-black text-white px-6 sm:px-8 py-4 rounded-lg font-semibold hover:bg-black/80 transition-all transform hover:scale-105 flex items-center gap-2 justify-center">
@@ -74,7 +83,8 @@ export default async function Index() {
                 Busca Inteligente
               </h3>
               <p className="text-gray-600">
-                Encontre imóveis próximos a você com nosso sistema de geolocalização.
+                Encontre imóveis próximos a você com nosso sistema de
+                geolocalização.
               </p>
             </div>
             <div className="bg-white p-6 sm:p-8 rounded-xl shadow-sm hover:shadow-md transition-all">
@@ -96,7 +106,8 @@ export default async function Index() {
                 Notificações
               </h3>
               <p className="text-gray-600">
-                Receba alertas de novos imóveis que correspondam aos seus interesses.
+                Receba alertas de novos imóveis que correspondam aos seus
+                interesses.
               </p>
             </div>
           </div>
@@ -108,13 +119,69 @@ export default async function Index() {
         <div className="container mx-auto">
           <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-              Interface <span className="text-primary">moderna</span> e intuitiva
+              Interface <span className="text-primary">moderna</span> e
+              intuitiva
             </h2>
             <p className="text-gray-600 text-base sm:text-lg">
               Navegue facilmente por todas as funcionalidades do aplicativo
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-8">
+          {/* Carousel mobile */}
+          <div className="block sm:hidden">
+            <Swiper
+              spaceBetween={16}
+              slidesPerView={1}
+              pagination={{ clickable: true }}
+              modules={[Pagination]}
+              className="custom-swiper-pagination"
+            >
+              <SwiperSlide>
+                <div className="w-[220px] h-[440px] mx-auto bg-black rounded-[2rem] p-3">
+                  <div className="w-full h-full bg-white rounded-[1.5rem] overflow-hidden">
+                    <Image
+                      src={residenceScreenshot}
+                      alt="Kasa Ao Residence Screenshot"
+                      className="w-full h-full object-cover select-none pointer-events-none"
+                    />
+                  </div>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="w-[220px] h-[440px] mx-auto bg-black rounded-[2rem] p-3">
+                  <div className="w-full h-full bg-white rounded-[1.5rem] overflow-hidden">
+                    <Image
+                      src={homeScreenshot}
+                      alt="Kasa Ao Home Screenshot"
+                      className="w-full h-full object-cover select-none pointer-events-none"
+                    />
+                  </div>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="w-[220px] h-[440px] mx-auto bg-black rounded-[2rem] p-3">
+                  <div className="w-full h-full bg-white rounded-[1.5rem] overflow-hidden">
+                    <Image
+                      src={wishesScreenshot}
+                      alt="Kasa Ao Wishes Screenshot"
+                      className="w-full h-full object-cover select-none pointer-events-none"
+                    />
+                  </div>
+                </div>
+              </SwiperSlide>
+            </Swiper>
+            <style jsx global>{`
+              .custom-swiper-pagination .swiper-pagination-bullet {
+                background: #2563eb;
+                opacity: 0.4;
+              }
+              .custom-swiper-pagination .swiper-pagination-bullet-active {
+                background: #2563eb;
+                opacity: 1;
+              }
+            `}</style>
+          </div>
+          {/* Flex row desktop/tablette */}
+          <div className="hidden sm:flex flex-col sm:flex-row justify-center items-center gap-8">
             <div className="w-[220px] h-[440px] bg-black rounded-[2rem] p-3 transform transition-all hover:scale-105">
               <div className="w-full h-full bg-white rounded-[1.5rem] overflow-hidden">
                 <Image
@@ -124,7 +191,7 @@ export default async function Index() {
                 />
               </div>
             </div>
-            <div className="w-[220px] h-[440px] bg-black rounded-[2rem] p-3 transform transition-all hover:scale-105 hidden sm:block">
+            <div className="w-[220px] h-[440px] bg-black rounded-[2rem] p-3 transform transition-all hover:scale-105">
               <div className="w-full h-full bg-white rounded-[1.5rem] overflow-hidden">
                 <Image
                   src={homeScreenshot}
@@ -133,7 +200,7 @@ export default async function Index() {
                 />
               </div>
             </div>
-            <div className="w-[220px] h-[440px] bg-black rounded-[2rem] p-3 transform transition-all hover:scale-105 hidden md:block">
+            <div className="w-[220px] h-[440px] bg-black rounded-[2rem] p-3 transform transition-all hover:scale-105">
               <div className="w-full h-full bg-white rounded-[1.5rem] overflow-hidden">
                 <Image
                   src={wishesScreenshot}
