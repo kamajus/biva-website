@@ -1,3 +1,5 @@
+import { FaApple, FaGooglePlay } from 'react-icons/fa'
+
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 
@@ -21,11 +23,11 @@ export default async function Index() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <button className="bg-black text-white px-6 sm:px-8 py-4 rounded-lg font-semibold hover:bg-black/80 transition-all transform hover:scale-105 flex items-center gap-2 justify-center">
-                  <span className="text-2xl">🍎</span>
+                  <FaApple className="text-2xl" />
                   App Store
                 </button>
                 <button className="bg-black text-white px-6 sm:px-8 py-4 rounded-lg font-semibold hover:bg-black/80 transition-all transform hover:scale-105 flex items-center gap-2 justify-center">
-                  <span className="text-2xl">🤖</span>
+                  <FaGooglePlay className="text-2xl" />
                   Play Store
                 </button>
               </div>
@@ -127,11 +129,11 @@ export default async function Index() {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <button className="bg-black text-white px-6 sm:px-8 py-4 rounded-lg font-semibold hover:bg-black/80 transition-all transform hover:scale-105 flex items-center gap-2 justify-center">
-                <span className="text-2xl">🍎</span>
+                <FaApple className="text-2xl" />
                 App Store
               </button>
               <button className="bg-black text-white px-6 sm:px-8 py-4 rounded-lg font-semibold hover:bg-black/80 transition-all transform hover:scale-105 flex items-center gap-2 justify-center">
-                <span className="text-2xl">🤖</span>
+                <FaGooglePlay className="text-2xl" />
                 Play Store
               </button>
             </div>
