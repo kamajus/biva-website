@@ -4,6 +4,8 @@ import { createClient } from '@/utils/supabase/server'
 
 import AuthButton from './AuthButton'
 
+import icon from '../assets/icon.png'
+
 export default function Header() {
   const canInitSupabaseClient = () => {
     try {
@@ -21,7 +23,7 @@ export default function Header() {
       <div className="w-[95%] flex justify-between items-center text-sm">
         <div className="flex items-center gap-2">
           <Image
-            src="/assets/icon.png"
+            src={icon}
             alt="Kasa ao"
             width={32}
             height={32}
