@@ -25,8 +25,8 @@ export default function Header() {
           <Image
             src={icon}
             alt="Kasa ao"
-            width={40}
-            height={40}
+            width={80}
+            height={80}
             className="rounded-lg"
           />
           <h1 className="text-base font-medium">Kasa ao</h1>
