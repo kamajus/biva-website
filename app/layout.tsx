@@ -1,3 +1,4 @@
+import React from 'react'
 import { GeistSans } from 'geist/font/sans'
 import { Bounce, ToastContainer } from 'react-toastify'
 
@@ -10,7 +11,7 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: 'Beeva',
+  title: 'Kasa Ao',
   description: 'Oi!',
 }
 
