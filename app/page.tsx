@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 
@@ -14,22 +12,10 @@ export default async function Index() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-12">
             <div className="max-w-xl">
-              <div className="flex items-center gap-4 mb-6">
-                <Image
-                  src="/assets/icon.png"
-                  alt="Kasa Ao"
-                  width={64}
-                  height={64}
-                  className="rounded-xl"
-                />
-                <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
-                  Kasa Ao
-                </h1>
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">
-                Seu imóvel na <br />
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight">
+                Kasa Ao na <br />
                 <span className="text-thirdly">palma da mão</span>
-              </h2>
+              </h1>
               <p className="text-xl md:text-2xl mb-8 text-white/90">
                 Baixe agora o aplicativo e tenha acesso às melhores oportunidades imobiliárias em Angola
               </p>
@@ -45,8 +31,8 @@ export default async function Index() {
               </div>
             </div>
             <div className="md:w-1/2 flex justify-center">
-              <div className="w-[280px] h-[560px] bg-black rounded-[3rem] p-4 relative shadow-2xl">
-                <div className="w-full h-full bg-primary/10 rounded-[2.5rem] overflow-hidden">
+              <div className="w-[280px] h-[560px] bg-black rounded-[3rem] p-4 relative">
+                <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden">
                   <div className="w-32 h-8 bg-black absolute top-0 left-1/2 -translate-x-1/2 rounded-b-2xl" />
                 </div>
               </div>
@@ -67,7 +53,7 @@ export default async function Index() {
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100">
+            <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all">
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
                 <span className="text-2xl">📱</span>
               </div>
@@ -78,7 +64,7 @@ export default async function Index() {
                 Encontre imóveis próximos a você com nosso sistema de geolocalização.
               </p>
             </div>
-            <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100">
+            <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all">
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
                 <span className="text-2xl">💬</span>
               </div>
@@ -89,7 +75,7 @@ export default async function Index() {
                 Converse diretamente com proprietários e corretores pelo app.
               </p>
             </div>
-            <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100">
+            <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all">
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
                 <span className="text-2xl">🔔</span>
               </div>
@@ -115,14 +101,14 @@ export default async function Index() {
               Navegue facilmente por todas as funcionalidades do aplicativo
             </p>
           </div>
-          <div className="flex justify-center gap-8 overflow-x-auto pb-8">
-            <div className="w-[220px] h-[440px] bg-black rounded-[2rem] p-3 shadow-xl">
+          <div className="flex justify-center gap-8">
+            <div className="w-[220px] h-[440px] bg-black rounded-[2rem] p-3">
               <div className="w-full h-full bg-primary/10 rounded-[1.5rem]" />
             </div>
-            <div className="w-[220px] h-[440px] bg-black rounded-[2rem] p-3 shadow-xl">
+            <div className="w-[220px] h-[440px] bg-black rounded-[2rem] p-3">
               <div className="w-full h-full bg-primary/10 rounded-[1.5rem]" />
             </div>
-            <div className="w-[220px] h-[440px] bg-black rounded-[2rem] p-3 shadow-xl">
+            <div className="w-[220px] h-[440px] bg-black rounded-[2rem] p-3">
               <div className="w-full h-full bg-primary/10 rounded-[1.5rem]" />
             </div>
           </div>
