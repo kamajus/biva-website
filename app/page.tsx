@@ -1,147 +1,104 @@
-import { FaApple, FaGooglePlay } from 'react-icons/fa'
+import { FaHome, FaBell, FaCog, FaPlus, FaStar } from 'react-icons/fa'
+import { IoSearch } from 'react-icons/io5'
 
-import Footer from '@/components/Footer'
-import Header from '@/components/Header'
-
-export default async function Index() {
+export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
+    <main className="min-h-screen bg-gray-50">
+      {/* Search Bar */}
+      <div className="p-4 bg-gray-50">
+        <div className="relative">
+          <IoSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl" />
+          <input
+            type="text"
+            placeholder="Para onde você indo?"
+            className="w-full pl-12 pr-4 py-3 bg-white rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
+          />
+        </div>
+      </div>
 
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-primary to-secondly py-16 px-4">
-        <div className="absolute inset-0 bg-black/10" />
-        <div className="container mx-auto relative z-10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-12">
-            <div className="w-full md:w-1/2 text-center md:text-left">
-              <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 text-white leading-tight">
-                Kasa Ao na <br />
-                <span className="text-thirdly">palma da mão</span>
-              </h1>
-              <p className="text-lg sm:text-xl md:text-2xl mb-8 text-white/90">
-                Baixe agora o aplicativo e tenha acesso às melhores oportunidades imobiliárias em Angola
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                <button className="bg-black text-white px-6 sm:px-8 py-4 rounded-lg font-semibold hover:bg-black/80 transition-all transform hover:scale-105 flex items-center gap-2 justify-center">
-                  <FaApple className="text-2xl" />
-                  App Store
-                </button>
-                <button className="bg-black text-white px-6 sm:px-8 py-4 rounded-lg font-semibold hover:bg-black/80 transition-all transform hover:scale-105 flex items-center gap-2 justify-center">
-                  <FaGooglePlay className="text-2xl" />
-                  Play Store
-                </button>
-              </div>
-            </div>
-            <div className="w-full md:w-1/2 flex justify-center">
-              <div className="w-[240px] sm:w-[280px] h-[480px] sm:h-[560px] bg-black rounded-[3rem] p-4 relative">
-                <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden">
-                  <div className="w-24 sm:w-32 h-6 sm:h-8 bg-black absolute top-0 left-1/2 -translate-x-1/2 rounded-b-2xl" />
-                </div>
-              </div>
-            </div>
+      {/* Categories */}
+      <div className="px-4 py-2">
+        <div className="flex gap-2 overflow-x-auto no-scrollbar">
+          <button className="px-6 py-2 bg-red-50 text-red-600 rounded-full whitespace-nowrap font-medium">
+            Todos
+          </button>
+          <button className="px-6 py-2 bg-gray-100 text-gray-700 rounded-full whitespace-nowrap">
+            Apartamento
+          </button>
+          <button className="px-6 py-2 bg-gray-100 text-gray-700 rounded-full whitespace-nowrap">
+            Vivenda
+          </button>
+          <button className="px-6 py-2 bg-gray-100 text-gray-700 rounded-full whitespace-nowrap">
+            Terreno
+          </button>
+        </div>
+      </div>
+
+      {/* Property Listings */}
+      <div className="p-4 grid gap-4">
+        {/* Property Card 1 */}
+        <div className="bg-white rounded-xl overflow-hidden shadow">
+          <div className="relative">
+            <img
+              src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg"
+              alt="Property in Benguela"
+              className="w-full h-48 object-cover"
+            />
+            <button className="absolute top-4 right-4 bg-white p-2 rounded-full">
+              <FaStar className="text-gray-400" />
+            </button>
+          </div>
+          <div className="p-4">
+            <h3 className="font-bold text-lg">Benguela, Province, Angola</h3>
+            <p className="text-2xl font-bold mt-2">20.000,00 AKZ <span className="text-gray-500 text-sm">/mês</span></p>
           </div>
         </div>
-      </section>
 
-      {/* Features Section */}
-      <section className="py-16 sm:py-20 bg-white px-4">
-        <div className="container mx-auto">
-          <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-              Por que usar o <span className="text-primary">aplicativo</span>?
-            </h2>
-            <p className="text-gray-600 text-base sm:text-lg">
-              Tenha todas as funcionalidades na palma da sua mão
-            </p>
+        {/* Property Card 2 */}
+        <div className="bg-white rounded-xl overflow-hidden shadow">
+          <div className="relative">
+            <img
+              src="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg"
+              alt="Property in Luanda"
+              className="w-full h-48 object-cover"
+            />
+            <button className="absolute top-4 right-4 bg-white p-2 rounded-full">
+              <FaStar className="text-gray-400" />
+            </button>
           </div>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
-            <div className="bg-white p-6 sm:p-8 rounded-xl shadow-sm hover:shadow-md transition-all">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
-                <span className="text-2xl">📱</span>
-              </div>
-              <h3 className="text-lg sm:text-xl font-semibold mb-4 text-gray-900">
-                Busca Inteligente
-              </h3>
-              <p className="text-gray-600">
-                Encontre imóveis próximos a você com nosso sistema de geolocalização.
-              </p>
-            </div>
-            <div className="bg-white p-6 sm:p-8 rounded-xl shadow-sm hover:shadow-md transition-all">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
-                <span className="text-2xl">💬</span>
-              </div>
-              <h3 className="text-lg sm:text-xl font-semibold mb-4 text-gray-900">
-                Chat Integrado
-              </h3>
-              <p className="text-gray-600">
-                Converse diretamente com proprietários e corretores pelo app.
-              </p>
-            </div>
-            <div className="bg-white p-6 sm:p-8 rounded-xl shadow-sm hover:shadow-md transition-all">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
-                <span className="text-2xl">🔔</span>
-              </div>
-              <h3 className="text-lg sm:text-xl font-semibold mb-4 text-gray-900">
-                Notificações
-              </h3>
-              <p className="text-gray-600">
-                Receba alertas de novos imóveis que correspondam aos seus interesses.
-              </p>
-            </div>
+          <div className="p-4">
+            <h3 className="font-bold text-lg">Luanda Province, Angola</h3>
+            <p className="text-2xl font-bold mt-2">35.000,00 AKZ <span className="text-gray-500 text-sm">/mês</span></p>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* App Screenshots */}
-      <section className="py-16 sm:py-20 bg-secondly/30 px-4">
-        <div className="container mx-auto">
-          <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-              Interface <span className="text-primary">moderna</span> e intuitiva
-            </h2>
-            <p className="text-gray-600 text-base sm:text-lg">
-              Navegue facilmente por todas as funcionalidades do aplicativo
-            </p>
-          </div>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-8">
-            <div className="w-[220px] h-[440px] bg-black rounded-[2rem] p-3 transform transition-all hover:scale-105">
-              <div className="w-full h-full bg-primary/10 rounded-[1.5rem]" />
+      {/* Bottom Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t py-2 px-6">
+        <div className="flex justify-between items-center">
+          <button className="flex flex-col items-center text-primary">
+            <FaHome className="text-2xl" />
+            <span className="text-xs mt-1">Home</span>
+          </button>
+          <button className="flex flex-col items-center text-gray-400">
+            <FaStar className="text-2xl" />
+            <span className="text-xs mt-1">Favoritos</span>
+          </button>
+          <button className="flex flex-col items-center">
+            <div className="bg-primary p-4 rounded-full -mt-8">
+              <FaPlus className="text-xl text-white" />
             </div>
-            <div className="w-[220px] h-[440px] bg-black rounded-[2rem] p-3 transform transition-all hover:scale-105 hidden sm:block">
-              <div className="w-full h-full bg-primary/10 rounded-[1.5rem]" />
-            </div>
-            <div className="w-[220px] h-[440px] bg-black rounded-[2rem] p-3 transform transition-all hover:scale-105 hidden md:block">
-              <div className="w-full h-full bg-primary/10 rounded-[1.5rem]" />
-            </div>
-          </div>
+          </button>
+          <button className="flex flex-col items-center text-gray-400">
+            <FaBell className="text-2xl" />
+            <span className="text-xs mt-1">Alertas</span>
+          </button>
+          <button className="flex flex-col items-center text-gray-400">
+            <FaCog className="text-2xl" />
+            <span className="text-xs mt-1">Config</span>
+          </button>
         </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 sm:py-20 bg-thirdly px-4">
-        <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-6 text-white">
-              Baixe agora o aplicativo
-            </h2>
-            <p className="text-lg sm:text-xl text-white/90 mb-8">
-              Disponível gratuitamente para iOS e Android
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <button className="bg-black text-white px-6 sm:px-8 py-4 rounded-lg font-semibold hover:bg-black/80 transition-all transform hover:scale-105 flex items-center gap-2 justify-center">
-                <FaApple className="text-2xl" />
-                App Store
-              </button>
-              <button className="bg-black text-white px-6 sm:px-8 py-4 rounded-lg font-semibold hover:bg-black/80 transition-all transform hover:scale-105 flex items-center gap-2 justify-center">
-                <FaGooglePlay className="text-2xl" />
-                Play Store
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <Footer />
-    </div>
+      </div>
+    </main>
   )
 }
