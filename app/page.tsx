@@ -44,7 +44,7 @@ export default async function Index() {
                   <Image
                     src={homeScreenshot}
                     alt="Kasa Ao App Screenshot"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover select-none pointer-events-none"
                     priority
                   />
                 </div>
@@ -120,7 +120,7 @@ export default async function Index() {
                 <Image
                   src={residenceScreenshot}
                   alt="Kasa Ao Residence Screenshot"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover select-none pointer-events-none"
                 />
               </div>
             </div>
@@ -129,7 +129,7 @@ export default async function Index() {
                 <Image
                   src={homeScreenshot}
                   alt="Kasa Ao Home Screenshot"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover select-none pointer-events-none"
                 />
               </div>
             </div>
@@ -138,7 +138,7 @@ export default async function Index() {
                 <Image
                   src={wishesScreenshot}
                   alt="Kasa Ao Wishes Screenshot"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover select-none pointer-events-none"
                 />
               </div>
             </div>
