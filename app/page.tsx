@@ -1,7 +1,10 @@
 import { FaApple, FaGooglePlay } from 'react-icons/fa'
+import Image from 'next/image'
 
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
+
+import homeScreenshot from '../assets/screenshots/home.jpg'
 
 export default async function Index() {
   return (
@@ -36,6 +39,12 @@ export default async function Index() {
               <div className="w-[240px] sm:w-[280px] h-[480px] sm:h-[560px] bg-black rounded-[3rem] p-4 relative">
                 <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden">
                   <div className="w-24 sm:w-32 h-6 sm:h-8 bg-black absolute top-0 left-1/2 -translate-x-1/2 rounded-b-2xl" />
+                  <Image
+                    src={homeScreenshot}
+                    alt="Kasa Ao App Screenshot"
+                    className="w-full h-full object-cover"
+                    priority
+                  />
                 </div>
               </div>
             </div>
