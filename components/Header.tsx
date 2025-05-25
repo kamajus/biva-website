@@ -25,9 +25,9 @@ export default function Header() {
           <Image
             src={icon}
             alt="Kasa ao"
-            width={80}
-            height={80}
-            className="rounded-lg"
+            width={55}
+            height={55}
+            className="rounded py-4"
           />
           <h1 className="text-base font-medium">Kasa ao</h1>
         </div>
