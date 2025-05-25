@@ -5,6 +5,8 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 
 import homeScreenshot from '../assets/screenshots/home.jpg'
+import residenceScreenshot from '../assets/screenshots/residence.jpg'
+import wishesScreenshot from '../assets/screenshots/wishes.jpg'
 
 export default async function Index() {
   return (
@@ -114,13 +116,31 @@ export default async function Index() {
           </div>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-8">
             <div className="w-[220px] h-[440px] bg-black rounded-[2rem] p-3 transform transition-all hover:scale-105">
-              <div className="w-full h-full bg-primary/10 rounded-[1.5rem]" />
+              <div className="w-full h-full bg-white rounded-[1.5rem] overflow-hidden">
+                <Image
+                  src={residenceScreenshot}
+                  alt="Kasa Ao Residence Screenshot"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
             <div className="w-[220px] h-[440px] bg-black rounded-[2rem] p-3 transform transition-all hover:scale-105 hidden sm:block">
-              <div className="w-full h-full bg-primary/10 rounded-[1.5rem]" />
+              <div className="w-full h-full bg-white rounded-[1.5rem] overflow-hidden">
+                <Image
+                  src={homeScreenshot}
+                  alt="Kasa Ao Home Screenshot"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
             <div className="w-[220px] h-[440px] bg-black rounded-[2rem] p-3 transform transition-all hover:scale-105 hidden md:block">
-              <div className="w-full h-full bg-primary/10 rounded-[1.5rem]" />
+              <div className="w-full h-full bg-white rounded-[1.5rem] overflow-hidden">
+                <Image
+                  src={wishesScreenshot}
+                  alt="Kasa Ao Wishes Screenshot"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
